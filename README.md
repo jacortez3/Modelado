@@ -1,19 +1,30 @@
 1.	Arquitectura
  
 2.	Instalación del Docker Compose
+##
 mkdir -p ~/.docker/cli-plugins/
+##
 curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+##
 chmod +x ~/.docker/cli-plugins/docker-compose
+##
 docker compose version
+##
 mkdir ~/compose-demo
+##
 cd ~/compose-demo
+##
 3.	Configuración del mongoDB
+##
 Creamos dos Carpetas, la primera para la base de datos con data Cruda y la segunda con la data Limpia.
+##
 Archivo Docker-compose.yml
+##
 version: '3'
+##
 services:
 
-## Router
+# Router
   router01:
     image: mongo
     container_name: router-01
