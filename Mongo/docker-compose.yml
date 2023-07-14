@@ -1,15 +1,3 @@
-1.	Arquitectura
- 
-2.	Instalación del Docker Compose
-mkdir -p ~/.docker/cli-plugins/
-curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
-chmod +x ~/.docker/cli-plugins/docker-compose
-docker compose version
-mkdir ~/compose-demo
-cd ~/compose-demo
-3.	Configuración del mongoDB
-Creamos dos Carpetas, la primera para la base de datos con data Cruda y la segunda con la data Limpia.
-Archivo Docker-compose.yml
 version: '3'
 services:
 
@@ -240,35 +228,3 @@ volumes:
   
   mongodb_cluster_shard03_c_db:
   mongodb_cluster_shard03_c_config:
-
-
-Corremos los siguientes comandos para activar la replicación y el sharding
-docker-compose up -d
-
-docker-compose exec configsvr01 sh -c "mongosh < /scripts/init-configserver.js"
-
-docker-compose exec shard01-a sh -c "mongosh < /scripts/init-shard01.js"
-docker-compose exec shard02-a sh -c "mongosh < /scripts/init-shard02.js"
-docker-compose exec shard03-a sh -c "mongosh < /scripts/init-shard03.js"
-
-
-docker-compose exec router01 sh -c "mongosh < /scripts/init-router.js"
-
-
-docker-compose exec router01 mongosh --port 27017
-
------Enable sharding for database `MyDatabase`
-sh.enableSharding("MyDatabase")
-
-----Setup shardingKey for collection `MyCollection`**
-db.adminCommand( { shardCollection: "MyDatabase.MyCollection", key: { oemNumber: "hashed", zipCode: 1, supplierId: 1 } } )
-
-
- 
- 
-4.	Configuración del ETL
- 
- 
- 
-
-

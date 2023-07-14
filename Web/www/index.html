@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Estudiantes</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Tabla de Estudiantes</h1>
+
+        <a href="index.php?action=listEstudiantes" class="btn btn-primary mb-3">Agregar Estudiante</a>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>NRC</th>
+                    <th>Horario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                include 'config.php'; 
+                $result = $pdo->query("SELECT * FROM estudiante");
+        
+                if ($result && $result->rowCount() > 0) {
+                    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                        echo "<tr>";
+                        echo "<td>" . $row['id'] . "</td>";
+                        echo "<td>" . $row['nombre'] . "</td>";
+                        echo "<td>" . $row['apellido'] . "</td>";
+                        echo "<td>" . $row['correo'] . "</td>";
+                        echo "<td>" . $row['nrc'] . "</td>";
+                        echo "<td>" . $row['horario'] . "</td>";
+                        echo "<td>";
+                        echo "<a href='index.php?action=edit&id=" . $row['id'] . "'>Editar</a> ";
+                        echo "<a href='index.php?action=delete&id=" . $row['id'] . "'>Eliminar</a>";
+                        echo "</td>";
+                        echo "</tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='7'>No se encontraron registros.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

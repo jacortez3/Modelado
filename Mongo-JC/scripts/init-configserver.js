@@ -1,0 +1,1 @@
+rs.initiate({_id: "rs-config-server", configsvr: true, version: 1, members: [ { _id: 0, host : 'configsvr001:27017' }, { _id: 1, host : 'configsvr002:27017' }, { _id: 2, host : 'configsvr003:27017' } ] })
